@@ -12,12 +12,19 @@ class Api::V1::DoctorController < Api::V1::BaseController
   end
 
   def sign_up
-  	@doctor = Doctor.new(email: params[:email], password: params[:password])
+  	@doctor = Doctor.new(doctor_params)
   	if @doctor.save
   		success_response 200, "Sign up Success", json: payload(doctor)
   	else
       	error_response 401, "Sign up Failed", @doctor.errors
   	end
+  end
+
+
+  private
+
+  def doctor_params
+	params.permit(:email, :password)
   end
 
 end
