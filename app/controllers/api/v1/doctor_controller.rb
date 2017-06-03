@@ -1,6 +1,6 @@
 class Api::V1::DoctorController < Api::V1::BaseController
   protect_from_forgery prepend: true
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   def authenticate_doctor
     doctor = Doctor.find_for_database_authentication(email: params[:email])
@@ -14,9 +14,9 @@ class Api::V1::DoctorController < Api::V1::BaseController
   def sign_up
   	@doctor = Doctor.new(doctor_params)
   	if @doctor.save
-  		success_response 200, "Sign up Success", json: payload(doctor)
+  		success_response 200, "Sign up Success", json: payload(@doctor)
   	else
-      	error_response 401, "Sign up Failed", @doctor.errors
+      error_response 401, "Sign up Failed", @doctor.errors
   	end
   end
 
@@ -24,7 +24,7 @@ class Api::V1::DoctorController < Api::V1::BaseController
   private
 
   def doctor_params
-	params.permit(:email, :password)
+	  params.permit(:email, :password)
   end
 
 end
