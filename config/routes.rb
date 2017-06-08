@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 		  post 'auth_patient' => 'patient#authenticate_patient'
 		  post 'auth_doctor' => 'doctor#authenticate_doctor'
 		  post 'signup_doctor' => 'doctor#sign_up'
+		  post 'signup_patient' => 'patient#sign_up'
 		end
 	end
 
