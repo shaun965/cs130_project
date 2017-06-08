@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603221115) do
+ActiveRecord::Schema.define(version: 20170608185340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blood_fats", force: :cascade do |t|
+    t.float "number"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_blood_fats_on_patient_id"
+  end
+
+  create_table "blood_pressures", force: :cascade do |t|
+    t.float "high"
+    t.float "low"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_blood_pressures_on_patient_id"
+  end
+
+  create_table "blood_sugars", force: :cascade do |t|
+    t.float "number"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_blood_sugars_on_patient_id"
+  end
 
   create_table "doctors", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -39,6 +64,19 @@ ActiveRecord::Schema.define(version: 20170603221115) do
     t.index ["patient_id", "doctor_id"], name: "index_doctors_patients_on_patient_id_and_doctor_id"
   end
 
+  create_table "dr_scores", force: :cascade do |t|
+    t.integer "left_score"
+    t.integer "right_score"
+    t.string "left_photo"
+    t.string "right_photo"
+    t.string "left_note"
+    t.string "right_note"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_dr_scores_on_patient_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +94,8 @@ ActiveRecord::Schema.define(version: 20170603221115) do
     t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blood_fats", "patients"
+  add_foreign_key "blood_pressures", "patients"
+  add_foreign_key "blood_sugars", "patients"
+  add_foreign_key "dr_scores", "patients"
 end
