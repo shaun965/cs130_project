@@ -20,7 +20,6 @@ class Api::V1::DoctorController < Api::V1::BaseController
   	end
   end
 
-
   private
 
   def doctor_params

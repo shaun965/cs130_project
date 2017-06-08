@@ -2,12 +2,22 @@ class Api::V1::BaseController < ApplicationController
 
   protected
 
-  def authenticate_request!
-    unless user_id_in_token?
+  def authenticate_doctor_request!
+    unless doctor_id_in_token?
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
       return
     end
-    @current_user = User.find(auth_token[:user_id])
+    @current_doctor = Doctor.find(auth_token[:doctor_id])
+  rescue JWT::VerificationError, JWT::DecodeError
+    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+  end
+
+  def authenticate_patient_request!
+    unless patient_id_in_token?
+      render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+      return
+    end
+    @current_patient = Patient.find(auth_token[:patient_id])
   rescue JWT::VerificationError, JWT::DecodeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
@@ -25,8 +35,12 @@ class Api::V1::BaseController < ApplicationController
     @auth_token ||= JsonWebToken.decode(http_token)
   end
 
-  def user_id_in_token?
-    http_token && auth_token && auth_token[:user_id].to_i
+  def doctor_id_in_token?
+    http_token && auth_token && auth_token[:doctor_id].to_i
+  end
+
+  def patient_id_in_token?
+    http_token && auth_token && auth_token[:patient_id].to_i
   end
 
   # error and success response
