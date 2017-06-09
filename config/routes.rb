@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 		  post 'auth_doctor' => 'doctor#authenticate_doctor'
 		  post 'signup_doctor' => 'doctor#sign_up'
 		  post 'signup_patient' => 'patient#sign_up'
+		  post 'information' => 'information#create'
+		  get 'information' => 'information#index'
+		  get 'information/:id' => 'information#show'
 		end
 	end
 
