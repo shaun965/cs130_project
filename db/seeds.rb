@@ -16,4 +16,3 @@ Doctor.create(email: "a@a.a", password: "11111111")
 		patient.blood_fat.create(number: rand(100...250))
 	end
 end
-

@@ -15,16 +15,16 @@ class Api::V1::InformationController < Api::V1::BaseController
   	patient = current_doctor.patients.where(id: params[:id]).first
 
   	if patient
-	  response = {patient: patient, blood_sugar: patient.blood_sugars, blood_pressure: patient.blood_pressures, blood_fat: patient.blood_fat, dr: patient.dr_scores}
-	  success_response 200, "Successfully pulled", {response: response}
-	else
+	    response = {patient: patient, blood_sugar: patient.blood_sugars, blood_pressure: patient.blood_pressures, blood_fat: patient.blood_fat, dr: patient.dr_scores}
+	    success_response 200, "Successfully pulled", {response: response}
+	  else
   	  error_response 401, "Failed to pull", {}
 	end
 
   end
 
   def create
-
+    binding.pry
   	patient = Patient.where(email: params[:email]).first
   	unless params[:blood_fat][:number].blank?
   		blood_fat = BloodFat.new(blood_fat_params)

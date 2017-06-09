@@ -36,6 +36,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'pry'
 gem 'jwt'
 gem 'faker'
+gem 'simplecov', :require => false, :group => :test
 
 
 # Use Capistrano for deployment

@@ -3,7 +3,6 @@ class Api::V1::DoctorController < Api::V1::BaseController
   # before_action :authenticate_request!
 
   def authenticate_doctor
-    binding.pry
     doctor = Doctor.find_for_database_authentication(email: params[:email])
     if doctor and doctor.valid_password?(params[:password])
       success_response 200, "Login Success", json: payload(doctor)
