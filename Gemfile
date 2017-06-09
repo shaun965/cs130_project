@@ -35,6 +35,8 @@ gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'pry'
 gem 'jwt'
+gem 'faker'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

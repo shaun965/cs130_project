@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+100.times do |x| 
+	patient = Patient.create(name: Faker::Name.name, birthdate: Faker::Date.birthday(18, 65), height: rand(150...200), weight: rand(50...150), sex: "male", email: Faker::Internet.email, password: "11111111")
+	100.times do |x|
+		patient.blood_pressures.create(high: rand(120...180), low: rand(60...110))
+		patient.blood_sugars.create(number: rand(3...8))
+		patient.blood_fat.create(number: rand(100...250))
+	end
+end
